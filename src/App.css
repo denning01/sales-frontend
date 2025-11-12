@@ -148,4 +148,19 @@
   color: #28a745;
 }
 
+.buy-button {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.buy-button:hover {
+  background-color: #218838;
+}
 
