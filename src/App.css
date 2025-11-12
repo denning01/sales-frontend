@@ -210,14 +210,13 @@
   background-color: #006cdf;
 }
 
-
-/* Dark contact section */
+/* --- Dark Contact Section --- */
 .contact-section {
-  background-color: #242323;
+  background: linear-gradient(145deg, #0d0d0d, #1a1a1a);
   color: #eee;
   padding: 4rem 2rem;
   text-align: center;
-  border-top: 2px solid #030303;
+  border-top: 2px solid #222;
 }
 
 .contact-container {
@@ -226,46 +225,81 @@
 }
 
 .contact-title {
-  font-size: 2rem;
-  margin-bottom: 1rem;
+  font-size: 2.2rem;
   color: #00bcd4;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
+  margin-bottom: 0.5rem;
 }
 
 .contact-info {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  color: #bbb;
 }
 
-.contact-info a {
-  color: #00bcd4;
-  text-decoration: none;
-}
-
-.contact-info a:hover {
-  text-decoration: underline;
-}
-
-.social-links {
+/* --- Contact Form --- */
+.contact-form {
   display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  margin-top: 1rem;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-.social-links a {
-  color: #fff;
-  background: #222;
-  padding: 0.6rem 1.2rem;
+.contact-form input,
+.contact-form textarea {
+  background-color: #222;
+  color: #eee;
+  border: 1px solid #444;
   border-radius: 6px;
+  padding: 0.8rem;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #00bcd4;
+}
+
+.contact-form button {
+  background-color: #00bcd4;
+  color: #111;
+  border: none;
+  border-radius: 6px;
+  padding: 0.8rem;
+  font-size: 1.1rem;
+  cursor: pointer;
   transition: background 0.3s;
 }
 
-.social-links a:hover {
+.contact-form button:hover {
+  background-color: #00a1b3;
+}
+
+/* --- Thank You Message --- */
+.thank-you {
+  color: #00ffcc;
+  font-size: 1.2rem;
+  margin-top: 1rem;
+}
+
+/* --- Social Links --- */
+.social-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.social-link {
+  background: #222;
+  color: #eee;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.social-link:hover {
   background: #00bcd4;
   color: #111;
 }
-
-
