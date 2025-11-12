@@ -207,3 +207,61 @@
 }
 
 
+/* Dark contact section */
+.contact-section {
+  background-color: #242323;
+  color: #eee;
+  padding: 4rem 2rem;
+  text-align: center;
+  border-top: 2px solid #464545;
+}
+
+.contact-container {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.contact-title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #00bcd4;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.contact-info {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.contact-info a {
+  color: #00bcd4;
+  text-decoration: none;
+}
+
+.contact-info a:hover {
+  text-decoration: underline;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.social-links a {
+  color: #fff;
+  background: #222;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  transition: background 0.3s;
+}
+
+.social-links a:hover {
+  background: #00bcd4;
+  color: #111;
+}
+
+

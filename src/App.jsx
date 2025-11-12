@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "./components/Navbar";
 import ItemList from "./components/ItemList";
+import Contact from "./components/Contact";
 import "./App.css";
 
 function App() {
@@ -14,13 +15,7 @@ function App() {
         </p>
       </section>
       <ItemList />
-      <br />
-      <section id="contact" className="container">
-        <h2 className="title">Contact Us</h2>
-        <p style={{ textAlign: "center" }}>
-          Email: gichabadenning254@gmail.com| Phone: +254 759316941
-        </p>
-      </section>
+      <Contact />
     </div>
   );
 }
