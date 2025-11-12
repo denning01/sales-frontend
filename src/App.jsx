@@ -34,7 +34,8 @@ function App() {
                   Explore our latest products below.
                 </p>
               </section>
-              <ItemList />
+              {/* 👇 Pass user prop to ItemList */}
+              <ItemList user={user} />
             </div>
           }
         />
@@ -43,16 +44,10 @@ function App() {
         <Route path="/contact" element={<Contact />} />
 
         {/* Login Page */}
-        <Route
-          path="/login"
-          element={<LoginPage setUser={setUser} />}
-        />
+        <Route path="/login" element={<LoginPage setUser={setUser} />} />
 
         {/* Register Page */}
-        <Route
-          path="/register"
-          element={<RegisterPage setUser={setUser} />}
-        />
+        <Route path="/register" element={<RegisterPage setUser={setUser} />} />
       </Routes>
     </Router>
   );

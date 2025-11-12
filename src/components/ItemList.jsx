@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../App.css";
 
-export default function ItemList() {
+export default function ItemList({ user }) {
   const [items, setItems] = useState([]);
   const [editingItemId, setEditingItemId] = useState(null);
   const [editedItem, setEditedItem] = useState({});
@@ -133,26 +133,37 @@ export default function ItemList() {
                   <h3 className="item-name">{item.item}</h3>
                   <p className="item-description">{item.description}</p>
                   <p className="item-price">Ksh {item.price}</p>
-                  <div className="button-group">
-                    <button
-                      className="edit-button"
-                      onClick={() => handleEdit(item)}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      className="buy-button"
-                      onClick={() => handleBuy(item.id)}
-                    >
-                      Buy
-                    </button>
-                  </div>
+
+                  {/* 👇 Only show buttons if user is logged in */}
+                  {user && (
+                    <div className="button-group">
+                      <button
+                        className="edit-button"
+                        onClick={() => handleEdit(item)}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="buy-button"
+                        onClick={() => handleBuy(item.id)}
+                      >
+                        Buy
+                      </button>
+                    </div>
+                  )}
                 </div>
               </>
             )}
           </div>
         ))}
       </div>
+
+      {/* 👇 Message shown when user is not logged in */}
+      {!user && (
+        <p style={{ textAlign: "center", marginTop: "20px", color: "gray" }}>
+          Please <a href="/login">login</a> or <a href="/register">register</a> to edit or buy items.
+        </p>
+      )}
     </section>
   );
 }
