@@ -29,11 +29,12 @@ export default function Navbar({ user, setUser }) {
           <li>
             <Link to="/contact">Contact</Link>
           </li>
-          {user && (
+    {user && (
   <li>
     <Link to="/add-item">Add Item</Link>
   </li>
 )}
+
 
 
           {!user ? (

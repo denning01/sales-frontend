@@ -9,6 +9,8 @@ import "./App.css";
 import AddItemPage from "./pages/AddItemPage";
 
 
+
+
 function App() {
   // App-level user state
   const [user, setUser] = useState(null);
@@ -53,6 +55,7 @@ function App() {
 
         {/*Add Item Page*/}
         <Route path="/add-item" element={<AddItemPage user={user} />} />
+
 
       </Routes>
     </Router>
