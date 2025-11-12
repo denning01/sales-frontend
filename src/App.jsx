@@ -6,6 +6,8 @@ import Contact from "./components/Contact";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import "./App.css";
+import AddItemPage from "./pages/AddItemPage";
+
 
 function App() {
   // App-level user state
@@ -48,6 +50,10 @@ function App() {
 
         {/* Register Page */}
         <Route path="/register" element={<RegisterPage setUser={setUser} />} />
+
+        {/*Add Item Page*/}
+        <Route path="/add-item" element={<AddItemPage user={user} />} />
+
       </Routes>
     </Router>
   );
