@@ -14,10 +14,11 @@ function App() {
         </p>
       </section>
       <ItemList />
+      <br />
       <section id="contact" className="container">
         <h2 className="title">Contact Us</h2>
         <p style={{ textAlign: "center" }}>
-          Email: contact@salesapp.com | Phone: +254 700 000 000
+          Email: gichabadenning254@gmail.com| Phone: +254 759316941
         </p>
       </section>
     </div>
