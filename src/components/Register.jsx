@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { normalizeUserPayload } from "../utils/auth";
 
 export default function Register({ setUser }) {
   const [formData, setFormData] = useState({
@@ -50,9 +51,11 @@ export default function Register({ setUser }) {
       const loginData = await loginRes.json();
       console.log("Auto-login successful:", loginData);
 
+      const normalizedUser = normalizeUserPayload(loginData);
+
       // Store user in localStorage and update app-level state
-      localStorage.setItem("user", JSON.stringify(loginData));
-      setUser(loginData);
+      localStorage.setItem("user", JSON.stringify(normalizedUser));
+      setUser(normalizedUser);
 
       // Redirect to home
       navigate("/");

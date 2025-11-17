@@ -51,7 +51,7 @@ export default function Navbar({ user, setUser }) {
           ) : (
             <>
               <li style={{ color: "#00bcd4", fontWeight: "bold" }}>
-                Hello, {user.username}
+                Hello, {user.username || user.email || "User"}
               </li>
               <li>
                 <button onClick={handleLogout} className="logout-button">

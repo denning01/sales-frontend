@@ -7,9 +7,7 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import "./App.css";
 import AddItemPage from "./pages/AddItemPage";
-
-
-
+import { normalizeUserPayload } from "./utils/auth";
 
 function App() {
   // App-level user state
@@ -18,7 +16,12 @@ function App() {
   // Load user from localStorage on app start
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
-    if (storedUser) setUser(JSON.parse(storedUser));
+    if (storedUser) {
+      const parsed = JSON.parse(storedUser);
+      const normalized = normalizeUserPayload(parsed);
+      setUser(normalized);
+      localStorage.setItem("user", JSON.stringify(normalized));
+    }
   }, []);
 
   return (

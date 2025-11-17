@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "../App.css";
 
-export default function ItemList({ user }) {
+export default function ItemList({ user }) 
+{
   const [items, setItems] = useState([]);
   const [editingItemId, setEditingItemId] = useState(null);
   const [editedItem, setEditedItem] = useState({});
@@ -9,6 +10,49 @@ export default function ItemList({ user }) {
   useEffect(() => {
     fetchItems();
   }, []);
+
+  const getAuthHeaders = () => {
+    if (!user?.token) return {};
+    return { Authorization: `Bearer ${user.token}` };
+  };
+
+  const getItemOwnerInfo = (item) => {
+    if (!item) return { id: null, username: null };
+
+    const ownerId =
+      item.userId ??
+      item.user_id ??
+      item.ownerId ??
+      item.owner_id ??
+      item.owner?.id ??
+      item.user?.id ??
+      null;
+
+    const ownerUsername =
+      item.ownerUsername ??
+      item.owner_username ??
+      item.username ??
+      item.owner?.username ??
+      item.user?.username ??
+      null;
+
+    return { id: ownerId, username: ownerUsername };
+  };
+
+  const canEditItem = (item) => {
+    if (!user) return false;
+    const owner = getItemOwnerInfo(item);
+
+    if (owner.id && user.id) {
+      return String(owner.id) === String(user.id);
+    }
+
+    if (owner.username && user.username) {
+      return owner.username === user.username;
+    }
+
+    return false;
+  };
 
   // Fetch all items
   const fetchItems = () => {
@@ -20,15 +64,26 @@ export default function ItemList({ user }) {
 
   // Delete / Buy item
   const handleBuy = (id) => {
+    if (!user?.token) {
+      alert("Please log in again to continue.");
+      return;
+    }
     fetch(`http://localhost:8080/sales/${id}`, {
       method: "DELETE",
+      headers: {
+        ...getAuthHeaders(),
+      },
     })
       .then((res) => {
         if (res.ok) {
           alert("Purchase successful!");
-          setItems(items.filter((item) => item.id !== id));
+          setItems((prev) => prev.filter((item) => item.id !== id));
         } else {
-          alert("Failed to purchase item.");
+          if (res.status === 401) {
+            alert("You are not authorized to buy this item.");
+          } else {
+            alert("Failed to purchase item.");
+          }
         }
       })
       .catch((err) => {
@@ -39,6 +94,10 @@ export default function ItemList({ user }) {
 
   // Enable edit mode
   const handleEdit = (item) => {
+    if (!canEditItem(item)) {
+      alert("You can only edit items you created.");
+      return;
+    }
     setEditingItemId(item.id);
     setEditedItem({ ...item });
   };
@@ -51,9 +110,22 @@ export default function ItemList({ user }) {
 
   // Save edited item to backend
   const handleSave = (id) => {
+    if (!user?.token) {
+      alert("Please log in again to continue.");
+      return;
+    }
+    const itemToUpdate = items.find((item) => item.id === id);
+    if (!canEditItem(itemToUpdate)) {
+      alert("You are not allowed to edit this item.");
+      setEditingItemId(null);
+      return;
+    }
     fetch(`http://localhost:8080/sales/${id}`, {
       method: "PATCH",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        ...getAuthHeaders(),
+      },
       body: JSON.stringify(editedItem),
     })
       .then((res) => {
@@ -137,12 +209,14 @@ export default function ItemList({ user }) {
                   {/* 👇 Only show buttons if user is logged in */}
                   {user && (
                     <div className="button-group">
-                      <button
-                        className="edit-button"
-                        onClick={() => handleEdit(item)}
-                      >
-                        Edit
-                      </button>
+                      {canEditItem(item) && (
+                        <button
+                          className="edit-button"
+                          onClick={() => handleEdit(item)}
+                        >
+                          Edit
+                        </button>
+                      )}
                       <button
                         className="buy-button"
                         onClick={() => handleBuy(item.id)}

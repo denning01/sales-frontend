@@ -30,9 +30,17 @@ export default function AddItemPage({ user }) {
     }
 
     try {
+      if (!user?.token) {
+        setError("Missing authentication token. Please log in again.");
+        return;
+      }
+
       const res = await fetch("http://localhost:8080/sales", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
         body: JSON.stringify(formData),
       });
 
